@@ -1,7 +1,3 @@
-Excellent. Since you’ll be running the export locally in MATLAB, here’s a streamlined plan to **automatically upload the results to ChatGPT** and receive the documentation generated for DO-178C/DO-331.
-
----
-
 ## ✅ Upload Companion Script Options
 
 There are **two ways** to automate the upload from your machine to ChatGPT:
@@ -81,7 +77,3 @@ print(response.choices[0].message["content"])
 | 🔧 Setup         | Minimal       | Requires Python + API |
 | 🔁 Repeatability | Manual        | Fully automatable     |
 | 📤 Upload        | ChatGPT UI    | Programmatic          |
-
----
-
-Would you like me to bundle the Python upload script into the zip or help you deploy it as a reusable tool for your CI/CD pipeline (e.g., GitLab/GitHub)?
