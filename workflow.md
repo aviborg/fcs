@@ -103,4 +103,3 @@ You **can** use ChatGPT to generate most DO-178C/DO-331 documentation from Simul
 * You format it into readable formats (JSON, CSV, XML, etc.)
 * You develop a repeatable pipeline with minimal manual effort
 
-Would you like help creating the MATLAB export scripts and a sample automation pipeline to generate the full documentation set from your model?
