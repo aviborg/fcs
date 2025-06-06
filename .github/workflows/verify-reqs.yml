@@ -1,0 +1,21 @@
+name: Verify Requirements Trace
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+
+jobs:
+  trace-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Validate Trace Links
+      run: python3 scripts/validate_trace.py
+
+    - name: Generate Traceability Matrix
+      run: python3 scripts/gen_rtm.py
+
+    - name: Generate Verification Report
+      run: python3 scripts/gen_verification_report.py

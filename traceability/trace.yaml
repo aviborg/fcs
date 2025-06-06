@@ -1,0 +1,9 @@
+REQ-001:
+  model_block: FCS_Controller/SetpointLimiter
+  test_case: TC-001
+  parent: SYS-007
+
+REQ-002:
+  model_block: FCS_Controller/Saturation
+  test_case: TC-002
+  parent: SYS-008
