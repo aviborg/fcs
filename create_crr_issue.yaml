@@ -1,0 +1,16 @@
+name: Auto-Certification Readiness Issue
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  create-cert-readiness-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create CRR issue
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "📋 Certification Readiness Review - ${{ github.event.release.tag_name }}"
+          content-filepath: .github/ISSUE_TEMPLATE/certification-readiness.md
+          labels: certification, checklist, review
