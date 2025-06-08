@@ -1,0 +1,31 @@
+name: Validate DO-178C Compliance Matrix
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  validate-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Validate Compliance Matrix Completion
+        run: |
+          MATRIX_FILE="docs/do178c_compliance_matrix.md"
+          INCOMPLETE=$(grep -E '\\| 🚧' "$MATRIX_FILE" | wc -l)
+          echo "Found $INCOMPLETE objectives marked as incomplete."
+
+          if [ "$INCOMPLETE" -gt 0 ]; then
+            echo "\n❌ Some DO-178C objectives are marked as incomplete (🚧). Please review the matrix."
+            exit 1
+          else
+            echo "\n✅ All DO-178C objectives are marked as completed (✔️)."
+          fi
+
+      - name: Upload Compliance Matrix
+        uses: actions/upload-artifact@v3
+        with:
+          name: do178c-compliance-matrix
+          path: docs/do178c_compliance_matrix.md
