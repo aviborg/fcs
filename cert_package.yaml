@@ -1,0 +1,35 @@
+name: Package DO-178C Certification Artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'release/**'
+
+jobs:
+  package-cert-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create Certification Package Zip
+        run: |
+          mkdir -p cert_package_output
+          zip -r cert_package_output/do178c_cert_package.zip \
+            planning/ \
+            development/ \
+            verification/ \
+            configuration/ \
+            tool_qualification/ \
+            docs/do178c_compliance_matrix.md \
+            reports/ \
+            README.md
+
+      - name: Upload Certification Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: do178c-cert-package
+          path: cert_package_output/do178c_cert_package.zip
+
