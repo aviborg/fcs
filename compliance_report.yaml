@@ -1,0 +1,39 @@
+name: Generate DO-178C Compliance Report
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - docs/do178c_compliance_matrix.md
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Convert Matrix to HTML
+        run: |
+          mkdir -p reports
+          pandoc docs/do178c_compliance_matrix.md \
+            -o reports/do178c_compliance_matrix.html \
+            --metadata title="DO-178C Compliance Matrix" \
+            --standalone
+
+      - name: Convert Matrix to PDF
+        run: |
+          pandoc docs/do178c_compliance_matrix.md \
+            -o reports/do178c_compliance_matrix.pdf \
+            --pdf-engine=pdflatex
+
+      - name: Upload Report Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: do178c-compliance-report
+          path: reports/
