@@ -1,6 +1,7 @@
 ---
 name: Certification Readiness Review
 about: Track DO-178C certification readiness for review or DER delivery
+title: "[DATE]: [FEATURE NAME]"
 labels: [certification, readiness, checklist]
 assignees: []
 ---
