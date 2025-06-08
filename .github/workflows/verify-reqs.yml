@@ -1,8 +1,6 @@
 name: Verify Requirements Trace
 
 on:
-  push:
-    branches: [ main, dev ]
   pull_request:
 
 jobs:
